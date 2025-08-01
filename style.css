@@ -1,10 +1,331 @@
-body {
-  font-family: sans-serif;
-  background-color: #f4f4f4;
-  margin: 20px;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-svg {
-  border: 1px solid #ccc;
-  background: #fff;
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #37003c 0%, #00ff87 100%);
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.epl-logo {
+  height: 50px;
+  margin-left: 20px;
+  position: absolute;
+  right: 20px;
+}
+
+h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin: 0;
+}
+
+main {
+  margin-top: 100px;
+  padding: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 80px;
+}
+
+#visualization-container {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+#main-svg {
+  width: 100%;
+  max-width: 1000px;
+  height: 600px;
+  display: block;
+  margin: 0 auto;
+}
+
+.axis {
+  font-size: 12px;
+  color: #666;
+}
+
+.axis text {
+  font-size: 11px;
+}
+
+.axis-label {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #333;
+}
+
+.grid-line {
+  stroke: #e0e0e0;
+  stroke-width: 1;
+  stroke-dasharray: 3,3;
+}
+
+.bar {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bar:hover {
+  opacity: 0.8;
+  stroke: #333;
+  stroke-width: 2;
+}
+
+.bar-label {
+  font-size: 11px;
+  fill: #333;
+  text-anchor: middle;
+  font-weight: 500;
+}
+
+.line {
+  fill: none;
+  stroke-width: 3;
+  transition: all 0.3s ease;
+}
+
+.expenditure-line {
+  stroke: #e74c3c;
+}
+
+.stat-line {
+  stroke: #3498db;
+}
+
+.line-point {
+  fill: white;
+  stroke-width: 3;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.line-point:hover {
+  r: 6;
+}
+
+.selected-point {
+  fill: #e74c3c !important;
+  stroke: #c0392b !important;
+  r: 8 !important;
+}
+
+#controls-panel {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.control-group {
+  margin-bottom: 15px;
+}
+
+.control-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #333;
+}
+
+select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #37003c;
+  box-shadow: 0 0 0 2px rgba(55, 0, 60, 0.1);
+}
+
+.back-button {
+  background: #37003c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: #2c0030;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(55, 0, 60, 0.3);
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 1000;
+  font-size: 13px;
+  line-height: 1.4;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+}
+
+.annotation {
+  font-size: 12px;
+}
+
+.annotation-note-bg {
+  fill: white;
+  stroke: #ccc;
+  stroke-width: 1;
+  rx: 3;
+  ry: 3;
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+}
+
+.annotation-note-title {
+  font-weight: bold;
+  font-size: 12px;
+  fill: #333;
+}
+
+.annotation-note-label {
+  font-size: 10px;
+  fill: #666;
+}
+
+.annotation-connector {
+  stroke: #666;
+  stroke-width: 1;
+  fill: none;
+}
+
+footer {
+  background: #333;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+#navigation-hints {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#navigation-hints p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.arsenal { fill: #EF0107; }
+.aston-villa { fill: #95BFE5; }
+.bournemouth { fill: #DA020E; }
+.brentford { fill: #F9F9F9; }
+.brighton { fill: #0057B8; }
+.burnley { fill: #6C1D45; }
+.cardiff { fill: #0070F3; }
+.chelsea { fill: #034694; }
+.crystal-palace { fill: #1B458F; }
+.everton { fill: #003399; }
+.fulham { fill: #FFFFFF; }
+.huddersfield { fill: #0E63AD; }
+.hull { fill: #F5A623; }
+.leeds { fill: #FFCD00; }
+.leicester { fill: #003090; }
+.liverpool { fill: #C8102E; }
+.manchester-city { fill: #6CABDD; }
+.manchester-united { fill: #DA020E; }
+.middlesbrough { fill: #DC143C; }
+.newcastle { fill: #241F20; }
+.norwich { fill: #FFF200; }
+.nottingham-forest { fill: #DD0000; }
+.sheffield-united { fill: #EE2737; }
+.southampton { fill: #D71920; }
+.stoke { fill: #E03A3E; }
+.sunderland { fill: #EB172B; }
+.swansea { fill: #FFFFFF; }
+.tottenham { fill: #132257; }
+.watford { fill: #FBEE23; }
+.west-brom { fill: #122F67; }
+.west-ham { fill: #7A263A; }
+.wolves { fill: #FDB462; }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header-content {
+    padding: 0 15px;
+  }
+  
+  main {
+    padding: 15px;
+    margin-top: 90px;
+  }
+  
+  #visualization-container {
+    padding: 20px;
+  }
+  
+  #main-svg {
+    height: 400px;
+  }
 }

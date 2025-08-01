@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>D3 Narrative Visualization Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Premier League: Transfer Spending Narrative</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Core D3 -->
+  <!-- D3 -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <!-- d3-annotation -->
@@ -15,11 +17,26 @@
   <script src="https://unpkg.com/topojson-client@3"></script>
 </head>
 <body>
-  <h1>D3 Library Test</h1>
-  <div id="vis-container">
-    <svg width="800" height="500"></svg>
-  </div>
-  <button id="nextBtn">Next Scene</button>
+  <header>
+    <div class="header-content">
+      <img src="Data/club_and_EPL_logos/Premier_League.png" alt="Premier League Logo" class="epl-logo">
+      <h1>English Premier League Transfer Spending</h1>
+    </div>
+  </header>
+
+  <main>
+    <div id="visualization-container">
+      <svg id="main-svg"></svg>
+      <div id="controls-panel"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div id="navigation-hints">
+      <p>Hover for champion & top-spender • Click to see season details</p>
+    </div>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
