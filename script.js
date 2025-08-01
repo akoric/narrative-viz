@@ -1,6 +1,3 @@
-// premier league transfer spending visualization
-// drill-down story with 3 scenes
-
 const state = {
   scene: 1,
   season: "2015/16",
@@ -20,7 +17,7 @@ const height = svgHeight - margin.top - margin.bottom;
 
 const neutralColors = d3.schemeSet3;
 
-// club colors (no white ones for visibilty)
+// club colors
 const clubColors = {
   "Arsenal": "#EF0107",
   "Aston Villa": "#95BFE5",
